@@ -4,6 +4,12 @@ MRDskill is a provenance-first Agent-Skill system for auditable cfDNA-MRD source
 
 The source package implements the ten operational skills defined in the manuscript supplement. Their module mapping, QC boundaries, and executable entrypoints are maintained in [`skills/registry.csv`](skills/registry.csv). [`skills/implementation_map.csv`](skills/implementation_map.csv) assigns every implementation source to one of those skills or to shared launch infrastructure.
 
+## Workflow Overview
+
+<p align="center">
+  <img src="docs/images/figure1.png" alt="MRDskill workflow overview" width="900">
+</p>
+
 ## Install
 
 ```powershell
@@ -33,6 +39,20 @@ The optional `opendataloader-pdf` CLI enables layout-aware PDF conversion. The b
 | Update/audit | `mrd-update-audit` | `skills/mrd-update-audit/scripts/update.py` |
 
 Run `python tools/validate_skill_coverage.py` to verify that the release still has exactly ten skills and that every implementation source is assigned. Experiment and figure scripts are marked `reproducibility` in the implementation map; they remain part of their owning skill and do not create an eleventh runtime skill.
+
+## Result Figures
+
+| Figure 2 | Figure 3 |
+| --- | --- |
+| <img src="docs/images/figure2.png" alt="MRDskill result figure 2" width="430"> | <img src="docs/images/figure3.png" alt="MRDskill result figure 3" width="430"> |
+
+| Figure 4 | Figure 5 |
+| --- | --- |
+| <img src="docs/images/figure4.png" alt="MRDskill result figure 4" width="430"> | <img src="docs/images/figure5.png" alt="MRDskill result figure 5" width="430"> |
+
+| Figure 6 | Figure 7 |
+| --- | --- |
+| <img src="docs/images/figure6.png" alt="MRDskill result figure 6" width="430"> | <img src="docs/images/figure7.png" alt="MRDskill result figure 7" width="430"> |
 
 ## Example: Literature Search Then Harvest
 
