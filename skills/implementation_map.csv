@@ -1,0 +1,40 @@
+source_path,skill_owners,classification,launcher,role
+literature_harvest/scripts/search_pubmed.py,paper-search,internal,skills/paper-search/scripts/search.py,PubMed candidate search adapter
+literature_harvest/scripts/search_europepmc.py,paper-search,internal,skills/paper-search/scripts/search.py,Europe PMC candidate search adapter
+literature_harvest/scripts/search_crossref.py,paper-search,internal,skills/paper-search/scripts/search.py,Crossref candidate search adapter
+literature_harvest/scripts/search_openalex.py,paper-search,internal,skills/paper-search/scripts/search.py,OpenAlex candidate search adapter
+literature_harvest/scripts/search_google_scholar.py,paper-search,internal,skills/paper-search/scripts/search.py,Manual Google Scholar export adapter
+literature_harvest/scripts/merge_and_deduplicate.py,paper-search,internal,skills/paper-search/scripts/search.py,Candidate normalization and deduplication
+literature_harvest/scripts/download_fulltexts.py,literature-harvest,internal,skills/literature-harvest/scripts/harvest.py,Legally accessible full-text and supplement retrieval
+literature_harvest/scripts/harvest_utils.py,paper-search;literature-harvest,shared-internal,skills/paper-search/scripts/search.py;skills/literature-harvest/scripts/harvest.py,Shared literature search and harvest utilities
+scripts/mrd_clean_downloaded_outputs.py,literature-harvest,runtime,skills/literature-harvest/scripts/clean_outputs.py,Quarantine invalid files and rebuild manifests
+scripts/mrd_continue_download_and_dedup.py,literature-harvest,runtime,skills/literature-harvest/scripts/continue_harvest.py,Retry and deduplicate harvest outputs
+scripts/mrd_convert_pdfs_with_opendataloader.py,mrd-evidence-miner,optional-runtime,skills/mrd-evidence-miner/scripts/convert_pdf_opendataloader.py,Optional PDF conversion through external CLI
+scripts/mrd_fallback_convert_pdfs_with_pdfminer.py,mrd-evidence-miner,runtime,skills/mrd-evidence-miner/scripts/convert_pdf_pdfminer.py,Portable PDF text fallback conversion
+scripts/mrd_run_keyword_harvest_no_dedup.py,paper-search;literature-harvest,shared-runtime,skills/paper-search/scripts/search.py;skills/literature-harvest/scripts/harvest.py,Shared corpus coordinator with search-only mode
+scripts/mrdskill_audit_kg_coverage.py,mrd-update-audit,runtime,skills/mrd-update-audit/scripts/audit_coverage_full.py,Detailed KG and RAG coverage audit
+scripts/mrdskill_audit_kg_coverage_fast.py,mrd-update-audit,runtime,skills/mrd-update-audit/scripts/audit_coverage.py,Fast KG and RAG coverage audit
+scripts/mrdskill_augment_kg_with_cohort_rules.py,supplementary-rule,runtime,skills/supplementary-rule/scripts/augment_graph.py,Materialize cohort rules into graph and RAG chunks
+scripts/mrdskill_build_adjudication_layer.py,review-aware-adjudication,runtime,skills/review-aware-adjudication/scripts/build_layer.py,Create adjudication templates and protocol nodes
+scripts/mrdskill_build_decision_qc_report.py,review-aware-adjudication,runtime,skills/review-aware-adjudication/scripts/build_decision_report.py,Render compact decision QC report
+scripts/mrdskill_build_latest_kg_index.py,mrd-graphrag,runtime,skills/mrd-graphrag/scripts/build_index.py,Build exact KG rule index
+scripts/mrdskill_build_mrd_kg_visualization.py,mrd-kg-builder,runtime,skills/mrd-kg-builder/scripts/build_visualization.py,Render browser-friendly evidence graph
+scripts/mrdskill_build_razavi_source_trace_benchmark.py,mrd-vcf-qc,reproducibility,skills/mrd-vcf-qc/scripts/reproduce_razavi_benchmark.py,Build external Razavi benchmark table
+scripts/mrdskill_build_supplementary_cohort_rules.py,supplementary-rule,runtime,skills/supplementary-rule/scripts/build_rules.py,Build supplementary cohort QC rules
+scripts/mrdskill_build_unified_rag_index.py,mrd-graphrag,runtime,skills/mrd-graphrag/scripts/build_unified_index.py,Build unified evidence and rule chunk index
+scripts/mrdskill_collect_case_qc_outputs.py,review-aware-adjudication,runtime,skills/review-aware-adjudication/scripts/collect_case_outputs.py,Collect case-level QC and review artifacts
+scripts/mrdskill_experiment3_source_tracing_adjudication.py,review-aware-adjudication,reproducibility,skills/review-aware-adjudication/scripts/reproduce_source_tracing.py,Reproduce source-tracing adjudication experiment
+scripts/mrdskill_experiment4_evidence_ablation.py,mrd-confidence-rater,reproducibility,skills/mrd-confidence-rater/scripts/reproduce_evidence_ablation.py,Reproduce evidence scoring ablation experiment
+scripts/mrdskill_experiment5_graphrag_generalization.py,mrd-graphrag,reproducibility,skills/mrd-graphrag/scripts/reproduce_generalization.py,Reproduce GraphRAG generalization experiment
+scripts/mrdskill_experiment6_longitudinal_monitoring.py,review-aware-adjudication,reproducibility,skills/review-aware-adjudication/scripts/reproduce_longitudinal_monitoring.py,Reproduce longitudinal monitoring experiment
+scripts/mrdskill_fetch_latest_literature.py,literature-harvest,runtime,skills/literature-harvest/scripts/fetch_latest_oa.py,Fetch a small OA incremental literature batch
+scripts/mrdskill_ingest_new_literature.py,mrd-update-audit,runtime,skills/mrd-update-audit/scripts/ingest_new_literature.py,Stage new literature through extraction and scoring
+scripts/mrdskill_plot_experiment2.py,mrd-kg-builder,reproducibility,skills/mrd-kg-builder/scripts/reproduce_skill_chain_figure.py,Reproduce cross-skill manuscript figure
+scripts/mrdskill_plot_razavi_experiment1.py,mrd-vcf-qc,reproducibility,skills/mrd-vcf-qc/scripts/reproduce_razavi_figure.py,Reproduce Razavi benchmark figure
+scripts/mrdskill_project_paths.py,shared,infrastructure,,Portable project and artifact paths
+scripts/mrdskill_qc_vcf_against_mrd_kg.py,mrd-vcf-qc;review-aware-adjudication,shared-runtime,skills/mrd-vcf-qc/scripts/run_qc.py;skills/review-aware-adjudication/scripts/run_adjudication.py,Caller-aware VCF QC and source-tracing orchestration
+scripts/mrdskill_query_mrd_kg_rag.py,mrd-graphrag,runtime,skills/mrd-graphrag/scripts/query_lexical.py,Lightweight local KG-RAG retriever
+scripts/mrdskill_rebuild_latest_kg_rag.py,mrd-update-audit,runtime,skills/mrd-update-audit/scripts/rebuild.py,Archive-first KG and RAG rebuild
+scripts/mrdskill_run_adjudication_rag.py,mrd-graphrag,runtime,skills/mrd-graphrag/scripts/query.py,Multi-round source-tracing retrieval protocol
+scripts/mrdskill_runner.py,shared,infrastructure,,Skill launcher support
+scripts/mrdskill_update_mrd_kg.py,mrd-update-audit,runtime,skills/mrd-update-audit/scripts/update.py,Coordinate incremental update and rebuild

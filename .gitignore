@@ -1,0 +1,36 @@
+# Python and local tooling
+__pycache__/
+*.py[cod]
+.venv/
+.pytest_cache/
+.mypy_cache/
+.vscode/
+
+# Runtime artifacts and source material
+artifacts/
+runs/
+downloaded_pdfs/
+downloaded_pdfs_deduplicated/
+supplementary_materials/
+supplementary_materials_deduplicated/
+pmc_oa_packages/
+pmc_oa_extracted/
+raw_api_results/
+merged_tables/
+download_logs/
+converted_pdfs/
+quarantine_invalid_downloads/
+
+# Secrets, browser state, and temporary Office files
+.env
+.env.*
+*.local.json
+*.local.yaml
+*.local.yml
+.chrome_*/
+~$*
+*.tmp
+
+# Large local dependencies and archives
+node_modules/
+*.rar

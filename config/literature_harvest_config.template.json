@@ -1,0 +1,132 @@
+{
+  "tool_name": "oncology_mrd_literature_harvest",
+  "email": "",
+  "restrict_to_allowed_journals": true,
+  "journal_policy_file": "mrd_high_impact_journal_policy.json",
+  "journal_query_filter": {
+    "enabled": false,
+    "max_terms": 80
+  },
+  "allowed_journals": [],
+  "additional_allowed_journals": [],
+  "sources": {
+    "pubmed": true,
+    "pmc": true,
+    "europepmc": true,
+    "crossref": true,
+    "openalex": true,
+    "google_scholar": false
+  },
+  "max_results_per_query": {
+    "pubmed": 200,
+    "pmc": 200,
+    "europepmc": 200,
+    "crossref": 200,
+    "openalex": 200,
+    "google_scholar": 20
+  },
+  "page_size": {
+    "europepmc": 100,
+    "crossref": 100,
+    "openalex": 100,
+    "google_scholar": 20
+  },
+  "delay_seconds": {
+    "pubmed": 0.34,
+    "pmc": 0.34,
+    "europepmc": 0.34,
+    "crossref": 0.5,
+    "openalex": 0.34,
+    "google_scholar": 1.0,
+    "unpaywall": 0.34,
+    "pmc_oa": 0.34,
+    "download": 0.25
+  },
+  "google_scholar": {
+    "api_key_env": "SERPAPI_KEY",
+    "manual_exports": [],
+    "as_ylo": "",
+    "as_yhi": ""
+  },
+  "external_fulltext": {
+    "enabled": true,
+    "unpaywall": true,
+    "pmc_oa": true,
+    "unpaywall_email": ""
+  },
+  "download": {
+    "enabled": true,
+    "timeout_seconds": 45,
+    "max_attempts_per_record": 5,
+    "max_supplementary_per_record": 0,
+    "max_supplementary_discovery_pages": 3,
+    "year_quota": {
+      "enabled": false,
+      "years": 10,
+      "per_year": 200,
+      "start_year": "",
+      "end_year": ""
+    }
+  },
+  "research_article_preference": true,
+  "exclude_reviews_by_default": false,
+  "include_terms": [
+    "minimal residual disease",
+    "measurable residual disease",
+    "molecular residual disease",
+    "MRD",
+    "ctDNA",
+    "circulating tumor DNA",
+    "liquid biopsy",
+    "recurrence monitoring",
+    "relapse prediction",
+    "molecular relapse",
+    "longitudinal monitoring"
+  ],
+  "secondary_terms": [
+    "CHIP",
+    "clonal hematopoiesis",
+    "tumor-informed",
+    "tumor-naive",
+    "methylation",
+    "fragmentomics",
+    "ultra-deep sequencing",
+    "ddPCR",
+    "NGS",
+    "recurrence",
+    "relapse",
+    "survival",
+    "lead time",
+    "disease-free survival",
+    "progression-free survival"
+  ],
+  "exclude_terms": [
+    "editorial",
+    "commentary",
+    "news",
+    "conference abstract",
+    "patent"
+  ],
+  "queries": [
+    {
+      "name": "ctdna_mrd_recurrence",
+      "query": "(ctDNA OR \"circulating tumor DNA\" OR \"liquid biopsy\") AND (MRD OR \"minimal residual disease\" OR \"molecular residual disease\") AND (recurrence OR relapse)"
+    },
+    {
+      "name": "mrd_longitudinal_monitoring",
+      "query": "(MRD OR \"minimal residual disease\" OR \"measurable residual disease\") AND (longitudinal OR monitoring OR surveillance) AND cancer"
+    },
+    {
+      "name": "tumor_informed_mrd",
+      "query": "(\"tumor-informed\" OR personalized) AND (MRD OR ctDNA OR \"circulating tumor DNA\")"
+    },
+    {
+      "name": "tumor_naive_mrd",
+      "query": "(\"tumor-naive\" OR \"tumor naive\" OR methylation OR fragmentomics) AND (MRD OR ctDNA OR \"circulating tumor DNA\")"
+    },
+    {
+      "name": "chip_false_positive_mrd",
+      "query": "(CHIP OR \"clonal hematopoiesis\" OR \"matched leukocyte\" OR \"white blood cell sequencing\") AND (ctDNA OR MRD OR \"liquid biopsy\")"
+    }
+  ]
+}
