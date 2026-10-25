@@ -1,0 +1,256 @@
+{
+  "title": "MRDskill Synthetic Demo KG",
+  "owner": "Phd.W",
+  "generated_from": {
+    "raw_csv": "examples/demo/scored_evidence.csv",
+    "scored_csv": "examples/demo/scored_evidence.csv",
+    "sources_csv": "examples/demo/source_manifest.csv",
+    "chunks_csv": "examples/demo/excel_chunks_manifest.csv",
+    "nodes_csv": "nodes.csv in selected output directory",
+    "relationships_csv": "relationships.csv in selected output directory",
+    "review_csv": "review_tasks.csv in selected output directory",
+    "rag_jsonl": "rag_chunks.jsonl in selected output directory",
+    "baseline_csv": "not supplied by the synthetic demo",
+    "cooccurrence_csv": "not supplied by the synthetic demo",
+    "mutex_csv": "not supplied by the synthetic demo"
+  },
+  "summary": {
+    "counts": {
+      "raw_evidence": 1,
+      "scored_evidence": 1,
+      "source_files": 0,
+      "excel_chunks": 0,
+      "graph_nodes": 7,
+      "graph_relationships": 11,
+      "review_tasks": 1,
+      "rag_summaries": 2,
+      "supplementary_evidence": 0,
+      "sheet_row_evidence": 0,
+      "excel_rows_seen": 0,
+      "excel_candidate_rows": 0,
+      "capped_sources": 0,
+      "baseline_rules": 0,
+      "cooccurrence_rules": 0,
+      "mutex_rules": 0
+    },
+    "confidence": {
+      "not_assessed": 1
+    },
+    "inclusion": {
+      "candidate_only": 1
+    },
+    "audit": {
+      "not_assessable": 1
+    },
+    "evidence_type": {
+      "synthetic_demo_only": 1
+    },
+    "clinical_relevance": {
+      "not_reported": 1
+    },
+    "biological_plausibility": {
+      "not_assessable": 1
+    },
+    "source_document_type": {},
+    "parser_status": {},
+    "chunk_status": {},
+    "node_labels": {
+      "Evidence": 1,
+      "Paper": 1,
+      "SourceLocation": 1,
+      "Cancer": 1,
+      "Assay": 1,
+      "Gene": 1,
+      "Variant": 1
+    },
+    "relationship_types": {
+      "SUPPORTS": 4,
+      "FROM_PAPER": 1,
+      "LOCATED_IN": 1,
+      "ASSOCIATED_WITH": 1,
+      "DETECTS": 1,
+      "HAS_VARIANT": 1,
+      "OBSERVED_IN": 1,
+      "DETECTS_VARIANT": 1
+    },
+    "relationship_confidence": {
+      "not_assessed": 11
+    },
+    "review_priority": {
+      "not_assessable": 1
+    },
+    "top_genes": {
+      "DEMO1": 1
+    },
+    "top_cancers": {
+      "synthetic_demo_only": 1
+    },
+    "top_assays": {
+      "synthetic_assay_placeholder": 1
+    }
+  },
+  "network_meta": {
+    "selected_genes": 1,
+    "selected_cancers": 1,
+    "selected_assays": 1,
+    "selected_variants": 0,
+    "selected_mrd_signals": 0,
+    "selected_outcomes": 0,
+    "aggregated_edges_before_pruning": 2,
+    "visual_edges": 2,
+    "visual_nodes": 3,
+    "visual_baseline_rules": 0,
+    "visual_cooccurrence_rules": 0,
+    "visual_mutex_rules": 0
+  },
+  "nodes": [
+    {
+      "id": "Gene:demo1",
+      "label": "Gene",
+      "name": "DEMO1",
+      "count": 1,
+      "confidence_counts": {
+        "not_assessed": 1
+      },
+      "audit_counts": {
+        "not_assessable": 1
+      },
+      "dominant_confidence": "not_assessed",
+      "color": "#6d5bd0",
+      "x": 0.5808,
+      "y": 0.0,
+      "z": 0.6611,
+      "sx": 0.5808,
+      "sy": 0.0,
+      "sz": 0.6611,
+      "radius": 7.52,
+      "sample_evidence": [
+        "DEMO-EVIDENCE-001"
+      ],
+      "tags": []
+    },
+    {
+      "id": "Cancer:synthetic_demo_only",
+      "label": "Cancer",
+      "name": "synthetic_demo_only",
+      "count": 1,
+      "confidence_counts": {
+        "not_assessed": 1
+      },
+      "audit_counts": {
+        "not_assessable": 1
+      },
+      "dominant_confidence": "not_assessed",
+      "color": "#2f6f73",
+      "x": 0.7873,
+      "y": 0.3747,
+      "z": 0.119,
+      "sx": 0.7873,
+      "sy": 0.3747,
+      "sz": 0.119,
+      "radius": 7.52,
+      "sample_evidence": [
+        "DEMO-EVIDENCE-001"
+      ],
+      "tags": []
+    },
+    {
+      "id": "Assay:synthetic_assay_placeholder",
+      "label": "Assay",
+      "name": "synthetic_assay_placeholder",
+      "count": 1,
+      "confidence_counts": {
+        "not_assessed": 1
+      },
+      "audit_counts": {
+        "not_assessable": 1
+      },
+      "dominant_confidence": "not_assessed",
+      "color": "#2d6cdf",
+      "x": -0.7116,
+      "y": 0.4715,
+      "z": 0.2136,
+      "sx": -0.7116,
+      "sy": 0.4715,
+      "sz": 0.2136,
+      "radius": 7.52,
+      "sample_evidence": [
+        "DEMO-EVIDENCE-001"
+      ],
+      "tags": []
+    }
+  ],
+  "edges": [
+    {
+      "id": "E00000",
+      "source": "Cancer:synthetic_demo_only",
+      "target": "Gene:demo1",
+      "type": "ASSOCIATED_WITH",
+      "label": "Cancer-Gene",
+      "count": 1,
+      "confidence_counts": {
+        "not_assessed": 1
+      },
+      "audit_counts": {
+        "not_assessable": 1
+      },
+      "dominant_confidence": "not_assessed",
+      "color": "#7a808a",
+      "samples": [
+        {
+          "evidence_id": "DEMO-EVIDENCE-001",
+          "title": "SYNTHETIC WORKFLOW FIXTURE — NOT A PAPER",
+          "confidence_score": "not_assessed",
+          "audit_priority": "not_assessable",
+          "source_file": "not_reported",
+          "source_sheet": "not_reported",
+          "source_row": "not_reported",
+          "doi": "not_reported",
+          "pmid": "not_reported"
+        }
+      ],
+      "tags": [],
+      "score": 1.0
+    },
+    {
+      "id": "E00001",
+      "source": "Assay:synthetic_assay_placeholder",
+      "target": "Gene:demo1",
+      "type": "DETECTS",
+      "label": "Assay-Gene",
+      "count": 1,
+      "confidence_counts": {
+        "not_assessed": 1
+      },
+      "audit_counts": {
+        "not_assessable": 1
+      },
+      "dominant_confidence": "not_assessed",
+      "color": "#7a808a",
+      "samples": [
+        {
+          "evidence_id": "DEMO-EVIDENCE-001",
+          "title": "SYNTHETIC WORKFLOW FIXTURE — NOT A PAPER",
+          "confidence_score": "not_assessed",
+          "audit_priority": "not_assessable",
+          "source_file": "not_reported",
+          "source_sheet": "not_reported",
+          "source_row": "not_reported",
+          "doi": "not_reported",
+          "pmid": "not_reported"
+        }
+      ],
+      "tags": [],
+      "score": 1.0
+    }
+  ],
+  "relation_types": [
+    "ASSOCIATED_WITH",
+    "DETECTS"
+  ],
+  "node_labels": [
+    "Assay",
+    "Cancer",
+    "Gene"
+  ]
+}

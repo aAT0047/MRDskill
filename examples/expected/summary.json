@@ -1,0 +1,12 @@
+{
+  "scope": "synthetic software fixture; not biological evidence or benchmark",
+  "kg_nodes": 7,
+  "kg_relationships": 11,
+  "review_tasks": 1,
+  "rag_chunks": 2,
+  "rag_rounds": 7,
+  "rag_rounds_with_hits": 7,
+  "patient_data_included": false,
+  "external_literature_included": false,
+  "clinical_use": false
+}

@@ -1,0 +1,15 @@
+{
+  "query": "Synthetic workflow demo only: exercise cfDNA ctDNA MRD source-tracing retrieval for a caller signal; surface CHIP, matched WBC, assay LOD, serial and longitudinal context, artifacts, uncertainty, and source-trace checks. Do not make a clinical inference.",
+  "cancer_type": "synthetic_demo_only",
+  "stage": "not_assessable",
+  "treatment_setting": "synthetic_workflow_fixture",
+  "assay_type": "synthetic_assay_placeholder",
+  "sample_type": "synthetic_placeholder",
+  "timepoint": "not_assessable",
+  "gene": "DEMO1",
+  "variant": "DEMO1:p.SYNTHETIC",
+  "vaf": "not_assessable",
+  "mrd_status": "not_assessable",
+  "matched_wbc_status": "not_assessable",
+  "tumor_tissue_status": "not_assessable"
+}

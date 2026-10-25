@@ -1,0 +1,239 @@
+{
+  "scope": "synthetic software fixture; not biological evidence or benchmark",
+  "case": {
+    "query": "Synthetic workflow demo only: exercise cfDNA ctDNA MRD source-tracing retrieval for a caller signal; surface CHIP, matched WBC, assay LOD, serial and longitudinal context, artifacts, uncertainty, and source-trace checks. Do not make a clinical inference.",
+    "cancer_type": "synthetic_demo_only",
+    "stage": "not_assessable",
+    "treatment_setting": "synthetic_workflow_fixture",
+    "assay_type": "synthetic_assay_placeholder",
+    "sample_type": "synthetic_placeholder",
+    "timepoint": "not_assessable",
+    "gene": "DEMO1",
+    "variant": "DEMO1:p.SYNTHETIC",
+    "vaf": "not_assessable",
+    "mrd_status": "not_assessable",
+    "matched_wbc_status": "not_assessable",
+    "tumor_tissue_status": "not_assessable"
+  },
+  "missing_information_checklist": [
+    {
+      "field": "matched_wbc_status",
+      "status": "missing",
+      "reason": "Matched WBC/buffy coat status is needed to downgrade CHIP/hematopoietic origin."
+    },
+    {
+      "field": "tumor_tissue_status",
+      "status": "missing",
+      "reason": "Tumor tissue confirmation helps separate tumor-derived MRD from plasma-only noise."
+    },
+    {
+      "field": "timepoint",
+      "status": "missing",
+      "reason": "Sampling timepoint is needed to evaluate postoperative or post-treatment cfDNA perturbation."
+    },
+    {
+      "field": "vaf",
+      "status": "missing",
+      "reason": "VAF or molecular burden is needed for LOD, low-level signal, and longitudinal trend review."
+    },
+    {
+      "field": "assay_type",
+      "status": "provided",
+      "reason": "Assay type is needed for tumor-informed/tumor-naive and LOD interpretation."
+    },
+    {
+      "field": "stage",
+      "status": "missing",
+      "reason": "Cancer stage is needed for MRD-guided management evidence and false-negative risk."
+    },
+    {
+      "field": "treatment_setting",
+      "status": "provided",
+      "reason": "Treatment setting is needed before discussing escalation, de-escalation, or surveillance."
+    }
+  ],
+  "rounds": [
+    {
+      "round_id": "support_retrieval",
+      "agent": "retriever",
+      "purpose": "Find source-traceable evidence for caller-derived MRD molecular signals.",
+      "candidate_chunks_scored": 1,
+      "hits": [
+        {
+          "score": 93.5835,
+          "chunk_id": "SyntheticRule:DEMO-001",
+          "title": "Synthetic workflow checklist routing fixture",
+          "text": "SYNTHETIC WORKFLOW FIXTURE ONLY — no cohort data and no clinical rule. This text is present to test retrieval vocabulary for cfDNA ctDNA MRD, CHIP, matched WBC and buffy coat, germline, assay limit of detection (LOD), low VAF, tumor-informed context, serial longitudinal sampling, persistence, clearance, recurrence, relapse, artifacts, confounders, resistance, targeted therapy, trial eligibility, uncertainty, caller, source tracing, and expert checklist routing. It does not state a medical recommendation.",
+          "metadata": {
+            "kind": "cohort_rule",
+            "evidence_id": "",
+            "paper_id": "",
+            "doi": "",
+            "pmid": "",
+            "journal": "",
+            "confidence_score": "not_assessed",
+            "graph_inclusion_status": "candidate_only",
+            "audit_priority": "not_assessable"
+          }
+        }
+      ],
+      "rule_hits": []
+    },
+    {
+      "round_id": "variant_origin",
+      "agent": "variant_origin",
+      "purpose": "Trace possible tumor-derived, CHIP, hematopoietic, germline, or artifact origin.",
+      "candidate_chunks_scored": 1,
+      "hits": [
+        {
+          "score": 92.5835,
+          "chunk_id": "SyntheticRule:DEMO-001",
+          "title": "Synthetic workflow checklist routing fixture",
+          "text": "SYNTHETIC WORKFLOW FIXTURE ONLY — no cohort data and no clinical rule. This text is present to test retrieval vocabulary for cfDNA ctDNA MRD, CHIP, matched WBC and buffy coat, germline, assay limit of detection (LOD), low VAF, tumor-informed context, serial longitudinal sampling, persistence, clearance, recurrence, relapse, artifacts, confounders, resistance, targeted therapy, trial eligibility, uncertainty, caller, source tracing, and expert checklist routing. It does not state a medical recommendation.",
+          "metadata": {
+            "kind": "cohort_rule",
+            "evidence_id": "",
+            "paper_id": "",
+            "doi": "",
+            "pmid": "",
+            "journal": "",
+            "confidence_score": "not_assessed",
+            "graph_inclusion_status": "candidate_only",
+            "audit_priority": "not_assessable"
+          }
+        }
+      ],
+      "rule_hits": []
+    },
+    {
+      "round_id": "assay_timepoint_context",
+      "agent": "assay_context",
+      "purpose": "Retrieve assay design, LOD, sample type, and post-treatment timing evidence that affects source tracing.",
+      "candidate_chunks_scored": 1,
+      "hits": [
+        {
+          "score": 85.5835,
+          "chunk_id": "SyntheticRule:DEMO-001",
+          "title": "Synthetic workflow checklist routing fixture",
+          "text": "SYNTHETIC WORKFLOW FIXTURE ONLY — no cohort data and no clinical rule. This text is present to test retrieval vocabulary for cfDNA ctDNA MRD, CHIP, matched WBC and buffy coat, germline, assay limit of detection (LOD), low VAF, tumor-informed context, serial longitudinal sampling, persistence, clearance, recurrence, relapse, artifacts, confounders, resistance, targeted therapy, trial eligibility, uncertainty, caller, source tracing, and expert checklist routing. It does not state a medical recommendation.",
+          "metadata": {
+            "kind": "cohort_rule",
+            "evidence_id": "",
+            "paper_id": "",
+            "doi": "",
+            "pmid": "",
+            "journal": "",
+            "confidence_score": "not_assessed",
+            "graph_inclusion_status": "candidate_only",
+            "audit_priority": "not_assessable"
+          }
+        }
+      ],
+      "rule_hits": []
+    },
+    {
+      "round_id": "longitudinal_clonal_context",
+      "agent": "longitudinal_context",
+      "purpose": "Find evidence for serial confirmation, tumor-informed tracking, clonal evolution, recurrence origin, and treatment-selected clones.",
+      "candidate_chunks_scored": 1,
+      "hits": [
+        {
+          "score": 89.5835,
+          "chunk_id": "SyntheticRule:DEMO-001",
+          "title": "Synthetic workflow checklist routing fixture",
+          "text": "SYNTHETIC WORKFLOW FIXTURE ONLY — no cohort data and no clinical rule. This text is present to test retrieval vocabulary for cfDNA ctDNA MRD, CHIP, matched WBC and buffy coat, germline, assay limit of detection (LOD), low VAF, tumor-informed context, serial longitudinal sampling, persistence, clearance, recurrence, relapse, artifacts, confounders, resistance, targeted therapy, trial eligibility, uncertainty, caller, source tracing, and expert checklist routing. It does not state a medical recommendation.",
+          "metadata": {
+            "kind": "cohort_rule",
+            "evidence_id": "",
+            "paper_id": "",
+            "doi": "",
+            "pmid": "",
+            "journal": "",
+            "confidence_score": "not_assessed",
+            "graph_inclusion_status": "candidate_only",
+            "audit_priority": "not_assessable"
+          }
+        }
+      ],
+      "rule_hits": []
+    },
+    {
+      "round_id": "targeted_resistance_context",
+      "agent": "therapy_context",
+      "purpose": "Retrieve treatment-related MRD evidence where specific caller alterations affect resistance monitoring, targeted therapy review, or trial eligibility.",
+      "candidate_chunks_scored": 1,
+      "hits": [
+        {
+          "score": 86.5835,
+          "chunk_id": "SyntheticRule:DEMO-001",
+          "title": "Synthetic workflow checklist routing fixture",
+          "text": "SYNTHETIC WORKFLOW FIXTURE ONLY — no cohort data and no clinical rule. This text is present to test retrieval vocabulary for cfDNA ctDNA MRD, CHIP, matched WBC and buffy coat, germline, assay limit of detection (LOD), low VAF, tumor-informed context, serial longitudinal sampling, persistence, clearance, recurrence, relapse, artifacts, confounders, resistance, targeted therapy, trial eligibility, uncertainty, caller, source tracing, and expert checklist routing. It does not state a medical recommendation.",
+          "metadata": {
+            "kind": "cohort_rule",
+            "evidence_id": "",
+            "paper_id": "",
+            "doi": "",
+            "pmid": "",
+            "journal": "",
+            "confidence_score": "not_assessed",
+            "graph_inclusion_status": "candidate_only",
+            "audit_priority": "not_assessable"
+          }
+        }
+      ],
+      "rule_hits": []
+    },
+    {
+      "round_id": "contradiction_uncertainty",
+      "agent": "contradiction_uncertainty",
+      "purpose": "Retrieve alternative source explanations, uncertainty, confounding, low-shedding, and no-call conditions.",
+      "candidate_chunks_scored": 1,
+      "hits": [
+        {
+          "score": 87.0835,
+          "chunk_id": "SyntheticRule:DEMO-001",
+          "title": "Synthetic workflow checklist routing fixture",
+          "text": "SYNTHETIC WORKFLOW FIXTURE ONLY — no cohort data and no clinical rule. This text is present to test retrieval vocabulary for cfDNA ctDNA MRD, CHIP, matched WBC and buffy coat, germline, assay limit of detection (LOD), low VAF, tumor-informed context, serial longitudinal sampling, persistence, clearance, recurrence, relapse, artifacts, confounders, resistance, targeted therapy, trial eligibility, uncertainty, caller, source tracing, and expert checklist routing. It does not state a medical recommendation.",
+          "metadata": {
+            "kind": "cohort_rule",
+            "evidence_id": "",
+            "paper_id": "",
+            "doi": "",
+            "pmid": "",
+            "journal": "",
+            "confidence_score": "not_assessed",
+            "graph_inclusion_status": "candidate_only",
+            "audit_priority": "not_assessable"
+          }
+        }
+      ],
+      "rule_hits": []
+    },
+    {
+      "round_id": "source_trace_protocol",
+      "agent": "source_trace_protocol",
+      "purpose": "Retrieve MRD-KGQC source-tracing templates, uncertainty flags, and expert checklist requirements.",
+      "candidate_chunks_scored": 1,
+      "hits": [
+        {
+          "score": 97.2767,
+          "chunk_id": "SyntheticRule:DEMO-001",
+          "title": "Synthetic workflow checklist routing fixture",
+          "text": "SYNTHETIC WORKFLOW FIXTURE ONLY — no cohort data and no clinical rule. This text is present to test retrieval vocabulary for cfDNA ctDNA MRD, CHIP, matched WBC and buffy coat, germline, assay limit of detection (LOD), low VAF, tumor-informed context, serial longitudinal sampling, persistence, clearance, recurrence, relapse, artifacts, confounders, resistance, targeted therapy, trial eligibility, uncertainty, caller, source tracing, and expert checklist routing. It does not state a medical recommendation.",
+          "metadata": {
+            "kind": "cohort_rule",
+            "evidence_id": "",
+            "paper_id": "",
+            "doi": "",
+            "pmid": "",
+            "journal": "",
+            "confidence_score": "not_assessed",
+            "graph_inclusion_status": "candidate_only",
+            "audit_priority": "not_assessable"
+          }
+        }
+      ],
+      "rule_hits": []
+    }
+  ]
+}

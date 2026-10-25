@@ -1,0 +1,36 @@
+{
+  "demo_version": "1.0.0",
+  "base_commit_before_demo_changes": "8eb21f3292d7ecee9de01247d4c8cde4d71a2a5e",
+  "working_tree_demo_changes_included": true,
+  "python": "3.13.9",
+  "generated_by": "scripts/run_demo.py",
+  "scope": "Synthetic offline demo only. Not the complete MRDskill corpus, KG, RAG index, or benchmark.",
+  "demo_fixture_license": "CC0-1.0; see examples/demo/README.md",
+  "implementation_sha256": {
+    "scripts/run_demo.py": "33051dc72e003dc13b97203c202dc8954553e6b6027d7c182e33c870baa7707e",
+    "skills/mrd-kg-builder/scripts/mrdskill_build_mrd_kg_csv.py": "f7d87266c52105ac5b5d0ad3ab9a49b338f9f51a569f9690ea21f72a6b4272e1",
+    "scripts/mrdskill_build_unified_rag_index.py": "e185b33ff9bff2774dd4a4bf4c14bfe65315da969791565e8acf3863738f3826",
+    "scripts/mrdskill_run_adjudication_rag.py": "a8fb27355bb7630e0332bac092f9f8ef95831c737de9b848074d6e54875df73d",
+    "scripts/mrdskill_build_mrd_kg_visualization.py": "fb39fa0ec5a69eb430b2c85372bd9be956dbf8a9775f5054959afb981066ef77"
+  },
+  "inputs_sha256": {
+    "examples/demo/README.md": "4703ba8e15a9c12680fdb65bea3bd396d9b71075b4a3f527610e931caa99640b",
+    "examples/demo/case.json": "cdd94a3eb7fa1cd3723584a815c2424465a568f7d89fc5a7552e1d4b5ba13599",
+    "examples/demo/scored_evidence.csv": "a1292a43c178427f193693f5bb5743e32d76a3b4a161df3b1c4b83fd22148d68",
+    "examples/demo/rule_chunks.jsonl": "762397ad71f826a46cd7c1dcacb51e1fac18f372c730fdc4cf96b2afdc2f7574",
+    "examples/demo/source_manifest.csv": "282b72afe7450702712371fc5126e3919ab5e64e1da16a49a88f30786ce58fb7",
+    "examples/demo/excel_chunks_manifest.csv": "de2fa9a0ea455fd6d63c1fd22f4a5a0e7e663f50bf4465d3276b88b1bf75a900",
+    "examples/demo/manifest.json": "d66dcc32d1a2f4a330221a8a60cfc4c47b7836548e1162d54ffb2d5cfe8523c7"
+  },
+  "outputs_sha256": {
+    "nodes.csv": "48efa3f8f1c31322ca6f3a6d8b6350577bdd272ce38215a77c458ff23f903d23",
+    "relationships.csv": "2d0f06467fb61306bc7006a03d56d9faf2ae96eedb2a6ae117ab291182f3ce83",
+    "review_tasks.csv": "3b337cfbca5f00be083d821e689c1d38f78928d7f266780d94f4ce9a3bd72299",
+    "evidence_summaries.jsonl": "3529e87e450599c6761a5d85766d2ab3d5c6f5b3e6d4b2cffa60bd44e3e6ba51",
+    "rag_chunks.jsonl": "041c3800881f9acfaa5bed870dcbf39e30f7b3667af648b94207883a8003496d",
+    "rag_retrieval.json": "cb61710ab36f2cc879c4a2e2086357da3565a022c3c5cb9c1f677a6d77060bda",
+    "summary.json": "06bbf344c35277903f2a8c5a29284727bce5bac65a06bdf1f40ff9f35dc44c88",
+    "kg_visualization_data.json": "41f623c3db8e29a78b5d1e64ba77009cbe8b89fd748d1ab1dfafa113ac572682",
+    "kg_demo.html": "996f8b852f83c6ac0c30c75214675ae742b50da53761d985d3afbec0489f030f"
+  }
+}

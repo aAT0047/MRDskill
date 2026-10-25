@@ -38,3 +38,4 @@ scripts/mrdskill_rebuild_latest_kg_rag.py,mrd-update-audit,runtime,skills/mrd-up
 scripts/mrdskill_run_adjudication_rag.py,mrd-graphrag,runtime,skills/mrd-graphrag/scripts/query.py,Multi-round source-tracing retrieval protocol
 scripts/mrdskill_runner.py,shared,infrastructure,,Skill launcher support
 scripts/mrdskill_update_mrd_kg.py,mrd-update-audit,runtime,skills/mrd-update-audit/scripts/update.py,Coordinate incremental update and rebuild
+scripts/run_demo.py,shared,infrastructure,,Run the offline synthetic KG and multi-round RAG reproducibility demo

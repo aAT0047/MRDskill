@@ -1,0 +1,898 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>MRDskill Synthetic Demo KG</title>
+  <style>
+    :root {
+      --bg: #eef2f6;
+      --ink: #18212f;
+      --muted: #667085;
+      --line: #d8dee8;
+      --panel: #ffffff;
+      --accent: #2b7c86;
+      --focus: #174a54;
+      --high: #25905a;
+      --medium: #b8860b;
+      --low: #b94a48;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--ink);
+      font: 14px/1.45 "Segoe UI", Arial, sans-serif;
+    }
+    header {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 16px;
+      align-items: center;
+      padding: 14px 18px;
+      border-bottom: 1px solid var(--line);
+      background: #fff;
+      position: sticky;
+      top: 0;
+      z-index: 10;
+    }
+    h1 {
+      font-size: 18px;
+      margin: 0;
+      font-weight: 650;
+      letter-spacing: 0;
+    }
+    .subhead {
+      margin-top: 2px;
+      color: var(--muted);
+      font-size: 12px;
+    }
+    .top-actions {
+      display: flex;
+      gap: 8px;
+      align-items: center;
+      flex-wrap: wrap;
+      justify-content: end;
+    }
+    button, select, input[type="search"] {
+      border: 1px solid var(--line);
+      background: #fff;
+      color: var(--ink);
+      border-radius: 6px;
+      padding: 7px 9px;
+      font: inherit;
+      min-height: 34px;
+    }
+    button:hover, select:hover { border-color: #a7b0c0; }
+    button:focus, select:focus, input:focus {
+      outline: 2px solid rgba(45,108,223,.18);
+      border-color: var(--accent);
+    }
+    input[type="search"] { width: min(28vw, 280px); }
+    .workspace {
+      display: grid;
+      grid-template-columns: 300px minmax(520px, 1fr) 330px;
+      gap: 12px;
+      padding: 12px;
+      min-height: calc(100vh - 66px);
+    }
+    .panel {
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      overflow: hidden;
+      min-width: 0;
+    }
+    .panel h2 {
+      margin: 0;
+      padding: 10px 12px;
+      font-size: 13px;
+      letter-spacing: 0;
+      border-bottom: 1px solid var(--line);
+      background: #fafbfc;
+    }
+    .panel-body { padding: 10px 12px; }
+    .stat-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 8px;
+    }
+    .stat {
+      border: 1px solid #e5e9f0;
+      border-radius: 7px;
+      padding: 8px;
+      min-width: 0;
+      background: #fbfcfe;
+    }
+    .stat-value {
+      font-size: 19px;
+      font-weight: 700;
+      white-space: nowrap;
+    }
+    .stat-label {
+      color: var(--muted);
+      font-size: 11px;
+      margin-top: 2px;
+    }
+    .controls {
+      display: grid;
+      gap: 10px;
+    }
+    .control-row {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 8px;
+      align-items: center;
+    }
+    .checks {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 6px;
+      color: #344054;
+    }
+    label {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      min-width: 0;
+    }
+    input[type="range"] { width: 100%; }
+    .bar-list {
+      display: grid;
+      gap: 6px;
+      margin-top: 8px;
+    }
+    .bar-row {
+      display: grid;
+      grid-template-columns: minmax(84px, 1fr) 58px;
+      gap: 8px;
+      align-items: center;
+      min-height: 22px;
+    }
+    .bar-track {
+      height: 8px;
+      background: #edf1f6;
+      border-radius: 999px;
+      overflow: hidden;
+      margin-top: 2px;
+    }
+    .bar-fill {
+      height: 100%;
+      background: var(--accent);
+      width: 0;
+    }
+    .bar-label {
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+      font-size: 12px;
+    }
+    .bar-value {
+      text-align: right;
+      color: var(--muted);
+      font-variant-numeric: tabular-nums;
+      font-size: 12px;
+    }
+    .canvas-panel {
+      display: grid;
+      grid-template-rows: auto minmax(0, 1fr);
+      align-self: start;
+      height: calc(100vh - 92px);
+      min-height: 760px;
+      max-height: 920px;
+    }
+    .canvas-toolbar {
+      display: flex;
+      gap: 8px;
+      align-items: center;
+      padding: 10px 12px;
+      border-bottom: 1px solid var(--line);
+      background: #fff;
+      flex-wrap: wrap;
+    }
+    .canvas-wrap {
+      position: relative;
+      background:
+        radial-gradient(circle at 50% 48%, #ffffff 0%, #f7fafc 58%, #eef3f8 100%);
+      min-height: 0;
+    }
+    canvas {
+      display: block;
+      width: 100%;
+      height: 100%;
+      min-height: 0;
+      cursor: grab;
+    }
+    canvas.dragging { cursor: grabbing; }
+    .sphere-hint {
+      position: absolute;
+      right: 12px;
+      top: 12px;
+      padding: 6px 8px;
+      border: 1px solid rgba(91,111,132,.24);
+      border-radius: 999px;
+      color: rgba(38,51,68,.78);
+      background: rgba(255,255,255,.78);
+      font-size: 11px;
+      pointer-events: none;
+    }
+    .legend {
+      position: absolute;
+      left: 12px;
+      bottom: 12px;
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+      max-width: calc(100% - 24px);
+      pointer-events: none;
+    }
+    .legend-item {
+      background: rgba(255,255,255,.86);
+      color: #243244;
+      border: 1px solid rgba(91,111,132,.20);
+      border-radius: 999px;
+      padding: 4px 8px;
+      font-size: 11px;
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+    }
+    .dot {
+      width: 9px;
+      height: 9px;
+      border-radius: 50%;
+      display: inline-block;
+    }
+    .detail-title {
+      font-weight: 700;
+      font-size: 15px;
+      margin-bottom: 6px;
+      overflow-wrap: anywhere;
+    }
+    .kv {
+      display: grid;
+      grid-template-columns: 112px 1fr;
+      gap: 4px 8px;
+      font-size: 12px;
+      margin: 8px 0;
+    }
+    .kv div:nth-child(odd) { color: var(--muted); }
+    .samples {
+      display: grid;
+      gap: 8px;
+      margin-top: 10px;
+    }
+    .sample {
+      border-top: 1px solid #edf0f4;
+      padding-top: 8px;
+      font-size: 12px;
+    }
+    .sample strong { display: block; margin-bottom: 3px; }
+    .table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 12px;
+    }
+    .table th, .table td {
+      border-bottom: 1px solid #edf0f4;
+      padding: 6px 4px;
+      text-align: left;
+      vertical-align: top;
+    }
+    .table th {
+      color: var(--muted);
+      font-weight: 600;
+    }
+    .pill {
+      display: inline-block;
+      border-radius: 999px;
+      border: 1px solid var(--line);
+      padding: 2px 6px;
+      font-size: 11px;
+      color: #344054;
+      background: #fff;
+    }
+    .scroll { max-height: 340px; overflow: auto; }
+    .muted { color: var(--muted); }
+    .section-gap { margin-top: 12px; }
+    @media (max-width: 1180px) {
+      .workspace { grid-template-columns: 1fr; }
+      input[type="search"] { width: min(70vw, 320px); }
+      .canvas-panel { min-height: 720px; }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div>
+      <h1>MRDskill Synthetic Demo KG</h1>
+      <div class="subhead">Synthetic software fixture - not evidence or clinical output</div>
+    </div>
+    <div class="top-actions">
+      <input id="searchBox" type="search" placeholder="Search node">
+      <button id="resetView" type="button" title="Reset viewport">Reset</button>
+    </div>
+  </header>
+
+  <main class="workspace">
+    <aside class="panel">
+      <h2>Build Summary</h2>
+      <div class="panel-body">
+        <div id="stats" class="stat-grid"></div>
+
+        <div class="section-gap">
+          <h2 style="margin:0 -12px 0 -12px;">Confidence</h2>
+          <div id="confidenceBars" class="bar-list"></div>
+        </div>
+
+        <div class="section-gap">
+          <h2 style="margin:0 -12px 0 -12px;">Evidence Source</h2>
+          <div id="evidenceBars" class="bar-list"></div>
+        </div>
+
+        <div class="section-gap">
+          <h2 style="margin:0 -12px 0 -12px;">Top Genes</h2>
+          <div id="geneBars" class="bar-list"></div>
+        </div>
+      </div>
+    </aside>
+
+    <section class="panel canvas-panel">
+      <div class="canvas-toolbar">
+        <div class="controls" style="grid-template-columns: 170px 210px 1fr; flex:1;">
+          <label>
+            View
+            <select id="viewSelect">
+              <option value="core">Core</option>
+              <option value="rules" selected>Gene Rules</option>
+              <option value="cooccurrence">Co-occurrence</option>
+              <option value="mutex">Mutual Exclusion</option>
+              <option value="variants">Variants</option>
+              <option value="review">Review</option>
+              <option value="chip">CHIP</option>
+              <option value="all">All</option>
+            </select>
+          </label>
+          <label>
+            Min edge evidence
+            <input id="minCount" type="range" min="1" max="80" value="1">
+            <span id="minCountLabel" class="pill">1</span>
+          </label>
+          <div class="checks" id="confidenceChecks">
+            <label><input type="checkbox" value="High" checked> High</label>
+            <label><input type="checkbox" value="Medium" checked> Medium</label>
+            <label><input type="checkbox" value="Low" checked> Low</label>
+            <label><input type="checkbox" value="Exclude"> Exclude</label>
+          </div>
+        </div>
+      </div>
+      <div class="canvas-wrap">
+        <canvas id="graphCanvas"></canvas>
+        <div class="sphere-hint">Drag rotate - Wheel zoom - Click node</div>
+        <div id="legend" class="legend"></div>
+      </div>
+    </section>
+
+    <aside class="panel">
+      <h2>Selection</h2>
+      <div id="detail" class="panel-body">
+        <div class="muted">No selection</div>
+      </div>
+      <h2>Top Relationships</h2>
+      <div class="panel-body scroll">
+        <table class="table" id="relationshipTable">
+          <thead><tr><th>Relation</th><th>Evidence</th><th>Confidence</th></tr></thead>
+          <tbody></tbody>
+        </table>
+      </div>
+      <h2>Top Cancer Types</h2>
+      <div class="panel-body">
+        <div id="cancerBars" class="bar-list"></div>
+      </div>
+      <h2>Top Assays</h2>
+      <div class="panel-body">
+        <div id="assayBars" class="bar-list"></div>
+      </div>
+    </aside>
+  </main>
+
+  <script id="kg-data" type="application/json">{"title": "MRDskill Synthetic Demo KG", "owner": "Phd.W", "generated_from": {"raw_csv": "examples/demo/scored_evidence.csv", "scored_csv": "examples/demo/scored_evidence.csv", "sources_csv": "examples/demo/source_manifest.csv", "chunks_csv": "examples/demo/excel_chunks_manifest.csv", "nodes_csv": "nodes.csv in selected output directory", "relationships_csv": "relationships.csv in selected output directory", "review_csv": "review_tasks.csv in selected output directory", "rag_jsonl": "rag_chunks.jsonl in selected output directory", "baseline_csv": "not supplied by the synthetic demo", "cooccurrence_csv": "not supplied by the synthetic demo", "mutex_csv": "not supplied by the synthetic demo"}, "summary": {"counts": {"raw_evidence": 1, "scored_evidence": 1, "source_files": 0, "excel_chunks": 0, "graph_nodes": 7, "graph_relationships": 11, "review_tasks": 1, "rag_summaries": 2, "supplementary_evidence": 0, "sheet_row_evidence": 0, "excel_rows_seen": 0, "excel_candidate_rows": 0, "capped_sources": 0, "baseline_rules": 0, "cooccurrence_rules": 0, "mutex_rules": 0}, "confidence": {"not_assessed": 1}, "inclusion": {"candidate_only": 1}, "audit": {"not_assessable": 1}, "evidence_type": {"synthetic_demo_only": 1}, "clinical_relevance": {"not_reported": 1}, "biological_plausibility": {"not_assessable": 1}, "source_document_type": {}, "parser_status": {}, "chunk_status": {}, "node_labels": {"Evidence": 1, "Paper": 1, "SourceLocation": 1, "Cancer": 1, "Assay": 1, "Gene": 1, "Variant": 1}, "relationship_types": {"SUPPORTS": 4, "FROM_PAPER": 1, "LOCATED_IN": 1, "ASSOCIATED_WITH": 1, "DETECTS": 1, "HAS_VARIANT": 1, "OBSERVED_IN": 1, "DETECTS_VARIANT": 1}, "relationship_confidence": {"not_assessed": 11}, "review_priority": {"not_assessable": 1}, "top_genes": {"DEMO1": 1}, "top_cancers": {"synthetic_demo_only": 1}, "top_assays": {"synthetic_assay_placeholder": 1}}, "network_meta": {"selected_genes": 1, "selected_cancers": 1, "selected_assays": 1, "selected_variants": 0, "selected_mrd_signals": 0, "selected_outcomes": 0, "aggregated_edges_before_pruning": 2, "visual_edges": 2, "visual_nodes": 3, "visual_baseline_rules": 0, "visual_cooccurrence_rules": 0, "visual_mutex_rules": 0}, "nodes": [{"id": "Gene:demo1", "label": "Gene", "name": "DEMO1", "count": 1, "confidence_counts": {"not_assessed": 1}, "audit_counts": {"not_assessable": 1}, "dominant_confidence": "not_assessed", "color": "#6d5bd0", "x": 0.5808, "y": 0.0, "z": 0.6611, "sx": 0.5808, "sy": 0.0, "sz": 0.6611, "radius": 7.52, "sample_evidence": ["DEMO-EVIDENCE-001"], "tags": []}, {"id": "Cancer:synthetic_demo_only", "label": "Cancer", "name": "synthetic_demo_only", "count": 1, "confidence_counts": {"not_assessed": 1}, "audit_counts": {"not_assessable": 1}, "dominant_confidence": "not_assessed", "color": "#2f6f73", "x": 0.7873, "y": 0.3747, "z": 0.119, "sx": 0.7873, "sy": 0.3747, "sz": 0.119, "radius": 7.52, "sample_evidence": ["DEMO-EVIDENCE-001"], "tags": []}, {"id": "Assay:synthetic_assay_placeholder", "label": "Assay", "name": "synthetic_assay_placeholder", "count": 1, "confidence_counts": {"not_assessed": 1}, "audit_counts": {"not_assessable": 1}, "dominant_confidence": "not_assessed", "color": "#2d6cdf", "x": -0.7116, "y": 0.4715, "z": 0.2136, "sx": -0.7116, "sy": 0.4715, "sz": 0.2136, "radius": 7.52, "sample_evidence": ["DEMO-EVIDENCE-001"], "tags": []}], "edges": [{"id": "E00000", "source": "Cancer:synthetic_demo_only", "target": "Gene:demo1", "type": "ASSOCIATED_WITH", "label": "Cancer-Gene", "count": 1, "confidence_counts": {"not_assessed": 1}, "audit_counts": {"not_assessable": 1}, "dominant_confidence": "not_assessed", "color": "#7a808a", "samples": [{"evidence_id": "DEMO-EVIDENCE-001", "title": "SYNTHETIC WORKFLOW FIXTURE — NOT A PAPER", "confidence_score": "not_assessed", "audit_priority": "not_assessable", "source_file": "not_reported", "source_sheet": "not_reported", "source_row": "not_reported", "doi": "not_reported", "pmid": "not_reported"}], "tags": [], "score": 1.0}, {"id": "E00001", "source": "Assay:synthetic_assay_placeholder", "target": "Gene:demo1", "type": "DETECTS", "label": "Assay-Gene", "count": 1, "confidence_counts": {"not_assessed": 1}, "audit_counts": {"not_assessable": 1}, "dominant_confidence": "not_assessed", "color": "#7a808a", "samples": [{"evidence_id": "DEMO-EVIDENCE-001", "title": "SYNTHETIC WORKFLOW FIXTURE — NOT A PAPER", "confidence_score": "not_assessed", "audit_priority": "not_assessable", "source_file": "not_reported", "source_sheet": "not_reported", "source_row": "not_reported", "doi": "not_reported", "pmid": "not_reported"}], "tags": [], "score": 1.0}], "relation_types": ["ASSOCIATED_WITH", "DETECTS"], "node_labels": ["Assay", "Cancer", "Gene"]}</script>
+  <script>
+    const kg = JSON.parse(document.getElementById('kg-data').textContent);
+    const nodesById = new Map(kg.nodes.map(node => [node.id, node]));
+    const canvas = document.getElementById('graphCanvas');
+    const ctx = canvas.getContext('2d');
+    const state = {
+      view: 'rules',
+      minCount: 1,
+      confidence: new Set(['High', 'Medium', 'Low']),
+      search: '',
+      zoom: 1,
+      panX: 0,
+      panY: 0,
+      rotX: -0.22,
+      rotY: 0.62,
+      autoRotate: true,
+      dragging: false,
+      lastX: 0,
+      lastY: 0,
+      hover: null,
+      selected: null
+    };
+
+    function fmt(value) {
+      return Number(value || 0).toLocaleString('en-US');
+    }
+
+    function shortName(value, limit = 26) {
+      value = String(value || '');
+      return value.length <= limit ? value : value.slice(0, limit - 3) + '...';
+    }
+
+    function escapeHtml(value) {
+      return String(value ?? '').replace(/[&<>"']/g, ch => ({
+        '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;'
+      }[ch]));
+    }
+
+    function renderStats() {
+      const counts = kg.summary.counts;
+      const stats = [
+        ['Evidence', counts.scored_evidence],
+        ['Nodes', counts.graph_nodes],
+        ['Relationships', counts.graph_relationships],
+        ['Co-occur', counts.cooccurrence_rules],
+        ['Mutex', counts.mutex_rules],
+        ['Baselines', counts.baseline_rules],
+        ['Review Tasks', counts.review_tasks],
+        ['Source Files', counts.source_files],
+        ['Supplementary', counts.supplementary_evidence]
+      ];
+      document.getElementById('stats').innerHTML = stats.map(([label, value]) => `
+        <div class="stat">
+          <div class="stat-value">${fmt(value)}</div>
+          <div class="stat-label">${escapeHtml(label)}</div>
+        </div>
+      `).join('');
+    }
+
+    function renderBars(id, data, limit = 10, color = '#2d6cdf') {
+      const entries = Object.entries(data || {}).sort((a, b) => b[1] - a[1]).slice(0, limit);
+      const max = Math.max(1, ...entries.map(item => item[1]));
+      document.getElementById(id).innerHTML = entries.map(([label, value]) => {
+        const pct = Math.max(3, Math.round(value / max * 100));
+        return `
+          <div class="bar-row" title="${escapeHtml(label)}: ${fmt(value)}">
+            <div>
+              <div class="bar-label">${escapeHtml(label)}</div>
+              <div class="bar-track"><div class="bar-fill" style="width:${pct}%;background:${color};"></div></div>
+            </div>
+            <div class="bar-value">${fmt(value)}</div>
+          </div>
+        `;
+      }).join('');
+    }
+
+    function visibleByView(edge) {
+      if (state.view === 'all') return true;
+      if (state.view === 'rules') return edge.tags.includes('rules') || edge.type.includes('RULE') || edge.type.includes('GENE_') || edge.type === 'CANCER_HAS_BASELINE';
+      if (state.view === 'cooccurrence') return edge.tags.includes('cooccurrence') || edge.type === 'GENE_COOCCURS_WITH';
+      if (state.view === 'mutex') return edge.tags.includes('mutex') || edge.type === 'GENE_MUTUALLY_EXCLUSIVE_WITH';
+      if (state.view === 'variants') return edge.type.includes('VARIANT') || edge.type === 'HAS_VARIANT' || edge.type === 'OBSERVED_IN';
+      if (state.view === 'review') return Number(edge.audit_counts.urgent_review || 0) > 0 || Number(edge.audit_counts.high_review || 0) > 0;
+      if (state.view === 'chip') return edge.tags.includes('chip');
+      return !edge.type.includes('VARIANT') && edge.type !== 'HAS_VARIANT' && edge.type !== 'OBSERVED_IN';
+    }
+
+    function confidenceVisible(edge) {
+      return Array.from(state.confidence).some(conf => Number(edge.confidence_counts[conf] || 0) > 0);
+    }
+
+    function visibleEdges() {
+      return kg.edges.filter(edge =>
+        edge.count >= state.minCount &&
+        visibleByView(edge) &&
+        confidenceVisible(edge)
+      );
+    }
+
+    function visibleNodes(edges) {
+      const ids = new Set();
+      edges.forEach(edge => {
+        ids.add(edge.source);
+        ids.add(edge.target);
+      });
+      let nodes = kg.nodes.filter(node => ids.has(node.id));
+      const query = state.search.trim().toLowerCase();
+      if (query) {
+        const matches = new Set(nodes.filter(node => node.name.toLowerCase().includes(query)).map(node => node.id));
+        const neighbourIds = new Set(matches);
+        edges.forEach(edge => {
+          if (matches.has(edge.source)) neighbourIds.add(edge.target);
+          if (matches.has(edge.target)) neighbourIds.add(edge.source);
+        });
+        nodes = nodes.filter(node => neighbourIds.has(node.id));
+      }
+      return nodes;
+    }
+
+    function rotatePoint(node) {
+      const cy = Math.cos(state.rotY);
+      const sy = Math.sin(state.rotY);
+      const cx = Math.cos(state.rotX);
+      const sx = Math.sin(state.rotX);
+      const x0 = node.sx ?? node.x;
+      const y0 = node.sy ?? node.y;
+      const z0 = node.sz ?? node.z ?? 0;
+      const x1 = x0 * cy + z0 * sy;
+      const z1 = -x0 * sy + z0 * cy;
+      const y1 = y0 * cx - z1 * sx;
+      const z2 = y0 * sx + z1 * cx;
+      return { x: x1, y: y1, z: z2 };
+    }
+
+    function sphereRadius() {
+      const rect = canvas.getBoundingClientRect();
+      return Math.max(190, Math.min(rect.width, rect.height) * 0.34 * state.zoom);
+    }
+
+    function screen(node) {
+      const rect = canvas.getBoundingClientRect();
+      const p3 = rotatePoint(node);
+      const depth = (p3.z + 1) / 2;
+      const perspective = 0.72 + depth * 0.34;
+      const radius = sphereRadius();
+      return {
+        x: rect.width / 2 + state.panX + p3.x * radius * perspective,
+        y: rect.height * 0.49 + state.panY + p3.y * radius * perspective,
+        z: p3.z,
+        depth,
+        scale: perspective,
+        r: Math.max(3.5, node.radius * 0.54 * perspective * state.zoom)
+      };
+    }
+
+    function resizeCanvas() {
+      const rect = canvas.parentElement.getBoundingClientRect();
+      const dpr = window.devicePixelRatio || 1;
+      canvas.width = Math.max(300, rect.width) * dpr;
+      canvas.height = Math.max(520, rect.height) * dpr;
+      canvas.style.width = `${Math.max(300, rect.width)}px`;
+      canvas.style.height = `${Math.max(520, rect.height)}px`;
+      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+      draw();
+    }
+
+    function hexToRgb(hex) {
+      const value = hex.replace('#', '');
+      return {
+        r: parseInt(value.slice(0, 2), 16),
+        g: parseInt(value.slice(2, 4), 16),
+        b: parseInt(value.slice(4, 6), 16)
+      };
+    }
+
+    function rgba(hex, alpha) {
+      const c = hexToRgb(hex);
+      return `rgba(${c.r},${c.g},${c.b},${alpha})`;
+    }
+
+    function drawSphereBase(rect) {
+      const radius = sphereRadius();
+      const cx = rect.width / 2 + state.panX;
+      const cy = rect.height * 0.49 + state.panY;
+      const glow = ctx.createRadialGradient(cx - radius * 0.28, cy - radius * 0.32, radius * 0.08, cx, cy, radius * 1.05);
+      glow.addColorStop(0, 'rgba(255,255,255,0.95)');
+      glow.addColorStop(0.42, 'rgba(224,239,246,0.58)');
+      glow.addColorStop(1, 'rgba(214,224,235,0.26)');
+      ctx.save();
+      ctx.beginPath();
+      ctx.arc(cx, cy, radius, 0, Math.PI * 2);
+      ctx.fillStyle = glow;
+      ctx.fill();
+      ctx.lineWidth = 1.1;
+      ctx.strokeStyle = 'rgba(75,91,110,0.22)';
+      ctx.stroke();
+      ctx.globalAlpha = 0.36;
+      ctx.strokeStyle = 'rgba(77,126,148,0.18)';
+      for (let i = -3; i <= 3; i++) {
+        ctx.beginPath();
+        ctx.ellipse(cx, cy, radius * Math.sqrt(Math.max(0, 1 - i * i / 16)), radius * 0.18, 0, 0, Math.PI * 2);
+        ctx.stroke();
+      }
+      for (let i = 0; i < 6; i++) {
+        ctx.beginPath();
+        ctx.ellipse(cx, cy, radius, radius * 0.18, i * Math.PI / 6, 0, Math.PI * 2);
+        ctx.stroke();
+      }
+      ctx.restore();
+    }
+
+    function drawEdge(edge) {
+      const source = nodesById.get(edge.source);
+      const target = nodesById.get(edge.target);
+      if (!source || !target) return;
+      const a = screen(source);
+      const b = screen(target);
+      const rect = canvas.getBoundingClientRect();
+      const cx = rect.width / 2 + state.panX;
+      const cy = rect.height / 2 + state.panY;
+      const midx = (a.x + b.x) / 2;
+      const midy = (a.y + b.y) / 2;
+      const curve = 0.18 + Math.min(0.28, Math.log1p(edge.count) / 32);
+      const c1x = midx + (midx - cx) * curve;
+      const c1y = midy + (midy - cy) * curve;
+      const avgDepth = (a.depth + b.depth) / 2;
+      const width = Math.min(5.5, 0.55 + Math.log1p(edge.count) * 0.42) * (0.72 + avgDepth * 0.36);
+      ctx.save();
+      ctx.globalAlpha = state.selected === edge.id || state.hover === edge.id ? 0.9 : 0.13 + avgDepth * 0.28;
+      ctx.strokeStyle = edge.color;
+      ctx.lineWidth = width;
+      ctx.beginPath();
+      ctx.moveTo(a.x, a.y);
+      ctx.quadraticCurveTo(c1x, c1y, b.x, b.y);
+      ctx.stroke();
+      ctx.restore();
+    }
+
+    function drawNode(node) {
+      const p = screen(node);
+      const query = state.search.trim().toLowerCase();
+      const matched = query && node.name.toLowerCase().includes(query);
+      const active = state.selected === node.id || state.hover === node.id || matched;
+      ctx.save();
+      ctx.beginPath();
+      ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+      ctx.fillStyle = node.color;
+      ctx.globalAlpha = active ? 1 : 0.46 + p.depth * 0.48;
+      ctx.fill();
+      ctx.lineWidth = active ? 3 : 1.1;
+      ctx.strokeStyle = active ? '#1f2937' : `rgba(255,255,255,${0.55 + p.depth * 0.35})`;
+      ctx.stroke();
+      if (active || (node.count > 1600 && p.depth > 0.68) || (p.depth > 0.76 && node.label !== 'Variant' && node.count > 650)) {
+        ctx.font = `${active ? 13 : 11}px Segoe UI, Arial, sans-serif`;
+        ctx.fillStyle = active ? '#111827' : 'rgba(31,41,55,0.82)';
+        ctx.globalAlpha = active ? 1 : 0.52 + p.depth * 0.42;
+        ctx.fillText(shortName(node.name, active ? 42 : 24), p.x + p.r + 4, p.y + 4);
+      }
+      ctx.restore();
+    }
+
+    function draw() {
+      const rect = canvas.getBoundingClientRect();
+      ctx.clearRect(0, 0, rect.width, rect.height);
+      const edges = visibleEdges();
+      const nodes = visibleNodes(edges);
+      const nodeIds = new Set(nodes.map(node => node.id));
+      const filteredEdges = edges.filter(edge => nodeIds.has(edge.source) && nodeIds.has(edge.target));
+      drawSphereBase(rect);
+      filteredEdges
+        .slice()
+        .sort((a, b) => {
+          const az = (screen(nodesById.get(a.source)).z + screen(nodesById.get(a.target)).z) / 2;
+          const bz = (screen(nodesById.get(b.source)).z + screen(nodesById.get(b.target)).z) / 2;
+          return az - bz;
+        })
+        .forEach(drawEdge);
+      nodes
+        .slice()
+        .sort((a, b) => screen(a).z - screen(b).z)
+        .forEach(drawNode);
+      updateRelationshipTable(filteredEdges.slice().sort((a, b) => b.count - a.count).slice(0, 80));
+    }
+
+    function updateRelationshipTable(edges) {
+      const tbody = document.querySelector('#relationshipTable tbody');
+      tbody.innerHTML = edges.slice(0, 26).map(edge => {
+        const source = nodesById.get(edge.source);
+        const target = nodesById.get(edge.target);
+        const high = edge.confidence_counts.High || 0;
+        const med = edge.confidence_counts.Medium || 0;
+        const low = edge.confidence_counts.Low || 0;
+        return `
+          <tr data-edge="${escapeHtml(edge.id)}">
+            <td>${escapeHtml(shortName(source?.name, 18))} -> ${escapeHtml(shortName(target?.name, 18))}<br><span class="muted">${escapeHtml(edge.label)}</span></td>
+            <td>${fmt(edge.count)}</td>
+            <td><span class="pill">H ${fmt(high)}</span> <span class="pill">M ${fmt(med)}</span> <span class="pill">L ${fmt(low)}</span></td>
+          </tr>
+        `;
+      }).join('');
+      tbody.querySelectorAll('tr[data-edge]').forEach(row => {
+        row.addEventListener('click', () => {
+          state.selected = row.getAttribute('data-edge');
+          renderDetail();
+          draw();
+        });
+      });
+    }
+
+    function findNearest(x, y) {
+      const edges = visibleEdges();
+      const nodes = visibleNodes(edges);
+      let best = null;
+      let bestDist = Infinity;
+      nodes.forEach(node => {
+        const p = screen(node);
+        const d = Math.hypot(x - p.x, y - p.y);
+        if (d < p.r + 8 && d < bestDist) {
+          best = node.id;
+          bestDist = d;
+        }
+      });
+      return best;
+    }
+
+    function renderDetail() {
+      const detail = document.getElementById('detail');
+      const selected = state.selected;
+      if (!selected) {
+        detail.innerHTML = '<div class="muted">No selection</div>';
+        return;
+      }
+      const node = nodesById.get(selected);
+      if (node) {
+        detail.innerHTML = `
+          <div class="detail-title">${escapeHtml(node.name)}</div>
+          <span class="pill">${escapeHtml(node.label)}</span>
+          <div class="kv">
+            <div>Evidence</div><div>${fmt(node.count)}</div>
+            <div>Dominant</div><div>${escapeHtml(node.dominant_confidence)}</div>
+            <div>High</div><div>${fmt(node.confidence_counts.High || 0)}</div>
+            <div>Medium</div><div>${fmt(node.confidence_counts.Medium || 0)}</div>
+            <div>Low</div><div>${fmt(node.confidence_counts.Low || 0)}</div>
+            <div>Tags</div><div>${escapeHtml(node.tags.join(', ') || 'none')}</div>
+          </div>
+          <div class="muted">Sample evidence: ${escapeHtml(node.sample_evidence.join(', ') || 'none')}</div>
+        `;
+        return;
+      }
+      const edge = kg.edges.find(item => item.id === selected);
+      if (edge) {
+        const source = nodesById.get(edge.source);
+        const target = nodesById.get(edge.target);
+        detail.innerHTML = `
+          <div class="detail-title">${escapeHtml(shortName(source?.name, 36))} -> ${escapeHtml(shortName(target?.name, 36))}</div>
+          <span class="pill">${escapeHtml(edge.label)}</span>
+          <div class="kv">
+            <div>Evidence</div><div>${fmt(edge.count)}</div>
+            <div>Dominant</div><div>${escapeHtml(edge.dominant_confidence)}</div>
+            <div>High</div><div>${fmt(edge.confidence_counts.High || 0)}</div>
+            <div>Medium</div><div>${fmt(edge.confidence_counts.Medium || 0)}</div>
+            <div>Low</div><div>${fmt(edge.confidence_counts.Low || 0)}</div>
+            <div>Urgent</div><div>${fmt(edge.audit_counts.urgent_review || 0)}</div>
+          </div>
+          <div class="samples">
+            ${edge.samples.map(sample => `
+              <div class="sample">
+                <strong>${escapeHtml(sample.evidence_id)}</strong>
+                <div>${escapeHtml(sample.title)}</div>
+                <div class="muted">${escapeHtml(sample.confidence_score)} - ${escapeHtml(sample.audit_priority)}</div>
+                <div class="muted">${escapeHtml(sample.source_file)}</div>
+                <div class="muted">DOI ${escapeHtml(sample.doi || 'not_reported')} | PMID ${escapeHtml(sample.pmid || 'not_reported')}</div>
+              </div>
+            `).join('')}
+          </div>
+        `;
+      }
+    }
+
+    function renderLegend() {
+      const colors = {
+        Cancer: '#2f6f73',
+        Gene: '#6d5bd0',
+        Variant: '#9a6a2f',
+        Assay: '#2d6cdf',
+        MRDSignal: '#b33f62',
+        ClinicalOutcome: '#3f7d3f',
+        GeneAssociationRule: '#c23b7a',
+        CancerGeneBaseline: '#138a72',
+        LocusFeature: '#8b5a2b'
+      };
+      document.getElementById('legend').innerHTML = Object.entries(colors).map(([label, color]) => `
+        <span class="legend-item"><span class="dot" style="background:${color};"></span>${label}</span>
+      `).join('');
+    }
+
+    function setInitialViewport() {
+      state.zoom = 1;
+      state.panX = 0;
+      state.panY = 0;
+      state.rotX = -0.22;
+      state.rotY = 0.62;
+      state.autoRotate = true;
+    }
+
+    document.getElementById('viewSelect').addEventListener('change', event => {
+      state.view = event.target.value;
+      draw();
+    });
+    document.getElementById('minCount').addEventListener('input', event => {
+      state.minCount = Number(event.target.value);
+      document.getElementById('minCountLabel').textContent = state.minCount;
+      draw();
+    });
+    document.getElementById('searchBox').addEventListener('input', event => {
+      state.search = event.target.value;
+      draw();
+    });
+    document.querySelectorAll('#confidenceChecks input').forEach(input => {
+      input.addEventListener('change', () => {
+        state.confidence = new Set(Array.from(document.querySelectorAll('#confidenceChecks input:checked')).map(item => item.value));
+        draw();
+      });
+    });
+    document.getElementById('resetView').addEventListener('click', () => {
+      setInitialViewport();
+      state.selected = null;
+      renderDetail();
+      draw();
+    });
+
+    canvas.addEventListener('mousedown', event => {
+      state.dragging = true;
+      state.lastX = event.offsetX;
+      state.lastY = event.offsetY;
+      canvas.classList.add('dragging');
+    });
+    window.addEventListener('mouseup', () => {
+      state.dragging = false;
+      canvas.classList.remove('dragging');
+    });
+    canvas.addEventListener('mousemove', event => {
+      if (state.dragging) {
+        const dx = event.offsetX - state.lastX;
+        const dy = event.offsetY - state.lastY;
+        if (event.shiftKey) {
+          state.panX += dx;
+          state.panY += dy;
+        } else {
+          state.rotY += dx * 0.008;
+          state.rotX += dy * 0.008;
+          state.rotX = Math.max(-1.35, Math.min(1.35, state.rotX));
+        }
+        state.lastX = event.offsetX;
+        state.lastY = event.offsetY;
+        state.autoRotate = false;
+        draw();
+        return;
+      }
+      state.hover = findNearest(event.offsetX, event.offsetY);
+      draw();
+    });
+    canvas.addEventListener('click', event => {
+      const nearest = findNearest(event.offsetX, event.offsetY);
+      if (nearest) {
+        state.selected = nearest;
+        renderDetail();
+        draw();
+      }
+    });
+    canvas.addEventListener('wheel', event => {
+      event.preventDefault();
+      const delta = event.deltaY < 0 ? 1.1 : 0.9;
+      state.zoom = Math.max(0.25, Math.min(2.4, state.zoom * delta));
+      draw();
+    }, { passive: false });
+
+    function animate() {
+      if (state.autoRotate && !state.dragging && !state.search.trim()) {
+        state.rotY += 0.0022;
+        draw();
+      }
+      requestAnimationFrame(animate);
+    }
+
+    renderStats();
+    renderBars('confidenceBars', kg.summary.confidence, 6, '#2d6cdf');
+    renderBars('evidenceBars', kg.summary.evidence_type, 8, '#6d5bd0');
+    renderBars('geneBars', kg.summary.top_genes, 12, '#6d5bd0');
+    renderBars('cancerBars', kg.summary.top_cancers, 10, '#2f6f73');
+    renderBars('assayBars', kg.summary.top_assays, 10, '#2d6cdf');
+    renderLegend();
+    setInitialViewport();
+    resizeCanvas();
+    animate();
+    window.addEventListener('resize', resizeCanvas);
+  </script>
+</body>
+</html>

@@ -1,0 +1,18 @@
+name: Reproducible demo
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  offline-demo:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - name: Validate the ten-skill registry
+        run: python tools/validate_skill_coverage.py
+      - name: Regenerate and verify synthetic KG/RAG outputs
+        run: python scripts/run_demo.py --output-dir artifacts/demo --verify-expected

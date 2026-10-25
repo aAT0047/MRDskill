@@ -1,0 +1,17 @@
+{
+  "name": "MRDskill synthetic reproducibility demo",
+  "version": "1.0.0",
+  "data_status": "synthetic; created solely to exercise software paths",
+  "license": "CC0-1.0",
+  "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
+  "contents": [
+    "README.md",
+    "case.json",
+    "scored_evidence.csv",
+    "rule_chunks.jsonl",
+    "source_manifest.csv",
+    "excel_chunks_manifest.csv"
+  ],
+  "provenance": "Authored for this repository demo. Contains no patient-level data, external paper text, real PMID/DOI, cohort result, or clinical claim.",
+  "limitations": "Synthetic outputs are for software verification only and must not be used for biological interpretation, clinical QC, or treatment decisions."
+}

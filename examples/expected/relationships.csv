@@ -1,0 +1,12 @@
+﻿relationship_id,start_node_id,end_node_id,relationship_type,confidence_score,evidence_strength_score,evidence_ids,source_pmids,source_dois,graph_inclusion_status,audit_priority,properties_json
+REL:08ad2fa56826d2,Evidence:DEMO-EVIDENCE-001,Paper:SYNTHETIC-DEMO-NOT-A-PAPER,FROM_PAPER,not_assessed,not_assessed,DEMO-EVIDENCE-001,not_reported,not_reported,candidate_only,not_assessable,{}
+REL:a0503bb63a24a0,Evidence:DEMO-EVIDENCE-001,SourceLocation:d04b0ab40383fc,LOCATED_IN,not_assessed,not_assessed,DEMO-EVIDENCE-001,not_reported,not_reported,candidate_only,not_assessable,{}
+REL:07d55ca5e93312,Evidence:DEMO-EVIDENCE-001,Cancer:e633e895888f0e,SUPPORTS,not_assessed,not_assessed,DEMO-EVIDENCE-001,not_reported,not_reported,candidate_only,not_assessable,{}
+REL:4c39d52e5b3ba7,Evidence:DEMO-EVIDENCE-001,Assay:bc930c070e1142,SUPPORTS,not_assessed,not_assessed,DEMO-EVIDENCE-001,not_reported,not_reported,candidate_only,not_assessable,{}
+REL:c3c77bd0403ae4,Evidence:DEMO-EVIDENCE-001,Gene:10f71961bd11dd,SUPPORTS,not_assessed,not_assessed,DEMO-EVIDENCE-001,not_reported,not_reported,candidate_only,not_assessable,{}
+REL:7b950b152dc5c6,Cancer:e633e895888f0e,Gene:10f71961bd11dd,ASSOCIATED_WITH,not_assessed,not_assessed,DEMO-EVIDENCE-001,not_reported,not_reported,candidate_only,not_assessable,{}
+REL:2dbc36c4d4274d,Assay:bc930c070e1142,Gene:10f71961bd11dd,DETECTS,not_assessed,not_assessed,DEMO-EVIDENCE-001,not_reported,not_reported,candidate_only,not_assessable,{}
+REL:b7e8ecaf021f35,Gene:10f71961bd11dd,Variant:7753c7d5674354,HAS_VARIANT,not_assessed,not_assessed,DEMO-EVIDENCE-001,not_reported,not_reported,candidate_only,not_assessable,{}
+REL:7c4695a5f32fe8,Evidence:DEMO-EVIDENCE-001,Variant:7753c7d5674354,SUPPORTS,not_assessed,not_assessed,DEMO-EVIDENCE-001,not_reported,not_reported,candidate_only,not_assessable,{}
+REL:9f0cfd036f0ca5,Variant:7753c7d5674354,Cancer:e633e895888f0e,OBSERVED_IN,not_assessed,not_assessed,DEMO-EVIDENCE-001,not_reported,not_reported,candidate_only,not_assessable,{}
+REL:09187304ae3612,Assay:bc930c070e1142,Variant:7753c7d5674354,DETECTS_VARIANT,not_assessed,not_assessed,DEMO-EVIDENCE-001,not_reported,not_reported,candidate_only,not_assessable,{}
